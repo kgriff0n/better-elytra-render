@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "io.github.kgriff0n.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ElytraFeatureRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "ElytraModelMixin"
+  ]
+}

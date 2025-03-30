@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "better-elytra-render",
+	"version": "${version}",
+	"name": "Better Elytra Render",
+	"description": "This mod aims to improve the look of elytra",
+	"authors": [
+		"KGriffon"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/project/better-elytra-render",
+		"sources": "https://github.com/kgriff0n/better-elytra-render"
+	},
+	"license": "MIT",
+	"icon": "assets/better-elytra-render/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.kgriff0n.BetterElytraRender"
+		]
+	},
+	"mixins": [
+		"better-elytra-render.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.5",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
