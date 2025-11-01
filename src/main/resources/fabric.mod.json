@@ -15,7 +15,7 @@
 	"icon": "assets/better-elytra-render/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"client": [
 			"io.github.kgriff0n.BetterElytraRender"
 		]
 	},

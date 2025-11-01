@@ -1,8 +1,9 @@
 package io.github.kgriff0n;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 
-public class BetterElytraRender implements ModInitializer {
+public class BetterElytraRender implements ClientModInitializer {
+
 	@Override
-	public void onInitialize() {}
+	public void onInitializeClient() {}
 }
