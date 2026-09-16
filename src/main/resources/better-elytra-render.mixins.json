@@ -3,7 +3,7 @@
   "package": "io.github.kgriff0n.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ElytraFeatureRendererMixin"
+    "WingsLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

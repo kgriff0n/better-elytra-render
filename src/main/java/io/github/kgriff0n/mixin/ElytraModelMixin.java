@@ -1,8 +1,8 @@
 package io.github.kgriff0n.mixin;
 
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.model.ElytraEntityModel;
-import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.model.object.equipment.ElytraModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(ElytraEntityModel.class)
+@Mixin(ElytraModel.class)
 public class ElytraModelMixin {
 
     @Shadow @Final private ModelPart leftWing;
@@ -27,10 +27,10 @@ public class ElytraModelMixin {
     double angle = 10;
 
     @ModifyArgs(
-            method = "getTexturedModelData",
+            method = "createLayer",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/model/ModelTransform;of(FFFFFF)Lnet/minecraft/client/model/ModelTransform;"
+                    target = "Lnet/minecraft/client/model/geom/PartPose;offsetAndRotation(FFFFFF)Lnet/minecraft/client/model/geom/PartPose;"
             )
     )
     private static void modifyModelTransformArgs(Args args) {
@@ -42,17 +42,17 @@ public class ElytraModelMixin {
         }
     }
 
-    @Inject(at = @At("TAIL"), method = "setAngles(Lnet/minecraft/client/render/entity/state/BipedEntityRenderState;)V")
-    private void modifyElytraRotation(BipedEntityRenderState bipedEntityRenderState, CallbackInfo ci) {
-        if (!bipedEntityRenderState.isGliding && !bipedEntityRenderState.isInSneakingPose) {
+    @Inject(at = @At("TAIL"), method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V")
+    private void modifyElytraRotation(HumanoidRenderState bipedEntityRenderState, CallbackInfo ci) {
+        if (!bipedEntityRenderState.isFallFlying && !bipedEntityRenderState.isCrouching) {
             if (x != bipedEntityRenderState.x || y != bipedEntityRenderState.y || z != bipedEntityRenderState.z) {
                 if (angle < 50) angle = increase(angle);
             } else {
                 if (angle > 10) angle -= 0.5;
             }
-            this.leftWing.pitch = this.rightWing.pitch = (float) Math.toRadians(angle);
-            this.leftWing.yaw = (float) Math.toRadians(angle - 10) * 0.2f;
-            this.rightWing.yaw = -(float) Math.toRadians(angle - 10) * 0.2f;
+            this.leftWing.xRot = this.rightWing.xRot = (float) Math.toRadians(angle);
+            this.leftWing.yRot = (float) Math.toRadians(angle - 10) * 0.2f;
+            this.rightWing.yRot = -(float) Math.toRadians(angle - 10) * 0.2f;
         }
         x = bipedEntityRenderState.x;
         y = bipedEntityRenderState.y;

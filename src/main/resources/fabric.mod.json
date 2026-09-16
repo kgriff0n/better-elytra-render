@@ -23,9 +23,9 @@
 		"better-elytra-render.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.10",
-		"minecraft": ">=1.21.6",
-		"java": ">=21",
+		"fabricloader": ">=0.19.0",
+		"minecraft": ">=26.3",
+		"java": ">=25",
 		"fabric-api": "*"
 	}
 }
